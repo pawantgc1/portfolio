@@ -1,461 +1,1097 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pawan Singh Boura — Performance Marketer</title>
+<title>Pawan Singh Boura — Digital Marketing Professional</title>
+<meta name="description" content="Pawan Singh Boura — Digital Marketing Professional specializing in SEO, Google Ads, and Meta Ads. 3 years of experience driving organic growth and lead generation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink: #10171F;
-    --ink-2: #171F29;
-    --ink-3: #1E2833;
-    --line: #2A3542;
-    --paper: #F1EEE4;
-    --paper-dim: #9CA7B1;
-    --paper-faint: #6A7580;
-    --amber: #E8A33D;
-    --amber-dim: #6B4E22;
-    --teal: #49C5B1;
-    --teal-dim: #244A44;
-  }
-  *{ box-sizing: border-box; margin:0; padding:0; }
-  html{ scroll-behavior: smooth; }
-  body{
-    background: var(--ink);
-    color: var(--paper);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-  h1,h2,h3, .display{
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-  }
-  .mono{ font-family: 'IBM Plex Mono', monospace; }
-  a{ color: inherit; text-decoration: none; }
-  .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 32px; }
-  section{ position: relative; }
+/* =========================================================
+   THEME VARIABLES
+========================================================= */
+:root{
+  --bg: #10171F;
+  --bg-2: #171F29;
+  --bg-3: #1E2833;
+  --text: #F1EEE4;
+  --text-dim: #9CA7B1;
+  --text-faint: #6A7580;
+  --amber: #E8A33D;
+  --amber-soft: rgba(232,163,61,0.12);
+  --teal: #49C5B1;
+  --teal-soft: rgba(73,197,177,0.12);
+  --line: #2A3542;
+  --glass: rgba(23,31,41,0.6);
+  --shadow: 0 20px 50px rgba(0,0,0,0.35);
+  --radius: 10px;
+}
 
-  /* ---------- NAV ---------- */
-  nav{
-    position: sticky; top:0; z-index: 50;
-    background: rgba(16,23,31,0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
-  nav .wrap{
-    display:flex; align-items:center; justify-content: space-between;
-    height: 68px;
-  }
-  .logo{
-    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:18px;
-    letter-spacing: 0.02em;
-  }
-  .logo span{ color: var(--amber); }
-  .navlinks{ display:flex; gap: 32px; font-size:14px; color: var(--paper-dim); }
-  .navlinks a:hover{ color: var(--paper); }
-  .nav-cta{
-    border: 1px solid var(--line); padding: 8px 16px; border-radius: 4px;
-    font-size: 13px; color: var(--paper);
-  }
-  .nav-cta:hover{ border-color: var(--amber); color: var(--amber); }
+[data-theme="light"]{
+  --bg: #F7F5EF;
+  --bg-2: #FFFFFF;
+  --bg-3: #F0ECE2;
+  --text: #1B2430;
+  --text-dim: #565F6B;
+  --text-faint: #8C94A0;
+  --amber: #C7791E;
+  --amber-soft: rgba(199,121,30,0.10);
+  --teal: #1E8F80;
+  --teal-soft: rgba(30,143,128,0.10);
+  --line: #E3DFD3;
+  --glass: rgba(255,255,255,0.7);
+  --shadow: 0 20px 50px rgba(30,20,0,0.08);
+}
 
-  /* ---------- HERO ---------- */
-  .hero{
-    padding: 96px 0 64px;
-    position: relative;
-  }
-  .hero-chart{
-    position: absolute; inset: 0; z-index: 0; opacity: 0.55;
-    pointer-events: none;
-  }
-  .hero-chart path{
-    fill: none; stroke-width: 2;
-  }
-  .hero-inner{ position: relative; z-index: 1; }
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--teal); margin-bottom: 20px; display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow::before{
-    content:''; width:20px; height:1px; background: var(--teal);
-  }
-  .hero h1{
-    font-size: clamp(40px, 7vw, 72px);
-    line-height: 1.02;
-    color: var(--paper);
-    max-width: 780px;
-  }
-  .hero-sub{
-    margin-top: 22px; max-width: 560px; font-size: 18px; color: var(--paper-dim);
-  }
-  .hero-stats{
-    margin-top: 56px; display:grid; grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--line);
-  }
-  .hstat{ padding: 24px 24px 0 0; border-right: 1px solid var(--line); }
-  .hstat:last-child{ border-right: none; }
-  .hstat .num{
-    font-family:'IBM Plex Mono', monospace; font-size: clamp(24px,3vw,34px);
-    color: var(--amber); font-weight: 500;
-  }
-  .hstat .lbl{ margin-top: 6px; font-size: 13px; color: var(--paper-faint); }
+*{ box-sizing: border-box; margin:0; padding:0; }
+html{ scroll-behavior: smooth; }
+body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.65;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+h1,h2,h3,h4{ font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; color: var(--text); }
+a{ color: inherit; text-decoration: none; }
+ul{ list-style: none; }
+img{ max-width: 100%; display:block; }
+.wrap{ max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+section{ padding: 110px 0; position: relative; }
+.accent-text{ color: var(--amber); }
 
-  /* ---------- SECTION HEADS ---------- */
-  .sec-head{ padding: 96px 0 40px; }
-  .sec-tag{
-    font-family:'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--amber); margin-bottom: 14px;
-  }
-  .sec-head h2{ font-size: clamp(28px, 4vw, 40px); color: var(--paper); max-width: 620px; }
-  .sec-head p{ margin-top: 14px; color: var(--paper-dim); max-width: 560px; font-size: 16px; }
+/* =========================================================
+   NAV
+========================================================= */
+nav{
+  position: sticky; top: 0; z-index: 100;
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner{ display:flex; align-items:center; justify-content: space-between; height: 72px; }
+.logo{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:19px; }
+.logo span{ color: var(--amber); }
+.navlinks{ display:flex; gap: 30px; font-size: 14px; }
+.navlinks a{ color: var(--text-dim); transition: color 0.2s; position: relative; }
+.navlinks a:hover{ color: var(--text); }
+.nav-actions{ display:flex; align-items:center; gap: 14px; }
+.theme-toggle{
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid var(--line); background: transparent; color: var(--text);
+  display:flex; align-items:center; justify-content:center; cursor: pointer;
+  transition: border-color 0.2s;
+}
+.theme-toggle:hover{ border-color: var(--amber); color: var(--amber); }
+.hamburger{
+  display:none; flex-direction: column; gap: 5px; background:none; border:none; cursor:pointer; padding: 8px;
+}
+.hamburger span{ width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
 
-  /* ---------- CASE STUDIES ---------- */
-  .case{
-    background: var(--ink-2);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 40px;
-    margin-bottom: 32px;
-  }
-  .case-top{
-    display:flex; justify-content: space-between; align-items: flex-start; gap: 24px;
-    flex-wrap: wrap;
-  }
-  .case-chip{
-    display:inline-block; font-family:'IBM Plex Mono', monospace; font-size: 11px;
-    letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 10px;
-    border: 1px solid var(--teal-dim); color: var(--teal); border-radius: 3px;
-    margin-bottom: 16px;
-  }
-  .case h3{ font-size: 26px; color: var(--paper); max-width: 560px; }
-  .case-client{ font-size: 13px; color: var(--paper-faint); margin-top: 8px; }
-  .case-body{ margin-top: 24px; color: var(--paper-dim); font-size: 15.5px; max-width: 680px; }
-  .case-stats{
-    margin-top: 32px; display:grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-    background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow:hidden;
-  }
-  .cstat{ background: var(--ink-3); padding: 18px 16px; }
-  .cstat .num{ font-family:'IBM Plex Mono', monospace; font-size: 22px; color: var(--amber); }
-  .cstat .lbl{ font-size: 12px; color: var(--paper-faint); margin-top: 4px; }
-  .case-shot{
-    margin-top: 28px; border: 1px solid var(--line); border-radius: 4px; overflow: hidden;
-  }
-  .case-shot img{ width: 100%; display:block; }
-  .shot-cap{
-    font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--paper-faint);
-    padding: 10px 14px; background: var(--ink-3); border-top: 1px solid var(--line);
-  }
-  .query-list{ margin-top: 22px; }
-  .query-list .qlabel{ font-size: 12px; color: var(--paper-faint); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;}
-  .qrow{
-    display:flex; justify-content: space-between; padding: 9px 0;
-    border-top: 1px solid var(--line); font-size: 14px;
-  }
-  .qrow:last-child{ border-bottom: 1px solid var(--line); }
-  .qrow .q{ color: var(--paper); }
-  .qrow .c{ font-family:'IBM Plex Mono', monospace; color: var(--paper-dim); }
+/* =========================================================
+   BUTTONS
+========================================================= */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding: 14px 26px; border-radius: 6px; font-size: 14px; font-weight: 600;
+  cursor: pointer; border: 1px solid transparent; transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.btn:hover{ transform: translateY(-2px); }
+.btn-primary{ background: var(--amber); color: #221505; }
+.btn-primary:hover{ background: #f0b458; }
+.btn-ghost{ background: var(--bg-3); color: var(--text); border-color: var(--line); }
+.btn-ghost:hover{ border-color: var(--teal); color: var(--teal); }
+.btn-outline{ border-color: var(--line); color: var(--text); }
+.btn-outline:hover{ border-color: var(--amber); color: var(--amber); }
 
-  /* mini bar chart for case 2 */
-  .leadchart{ margin-top: 28px; }
-  .leadchart-bars{
-    display:flex; align-items:flex-end; gap: 6px; height: 120px;
-    border-bottom: 1px solid var(--line); padding-bottom: 0;
-  }
-  .leadchart-bars .bar{
-    flex:1; background: var(--teal); border-radius: 2px 2px 0 0; opacity: 0.85;
-    transform: scaleY(0); transform-origin: bottom;
-    transition: transform 0.6s ease;
-  }
-  .leadchart-cap{ margin-top: 10px; font-size: 12px; color: var(--paper-faint); font-family:'IBM Plex Mono', monospace; display:flex; justify-content: space-between; }
+/* =========================================================
+   HERO
+========================================================= */
+#hero{ padding: 150px 0 90px; overflow: hidden; }
+.hero-bg{ position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.blob{
+  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.35;
+  animation: float 10s ease-in-out infinite;
+}
+.blob-1{ width: 420px; height: 420px; background: var(--teal); top: -150px; right: -100px; }
+.blob-2{ width: 380px; height: 380px; background: var(--amber); bottom: -180px; left: -120px; animation-delay: -4s; }
+@keyframes float{
+  0%,100%{ transform: translateY(0) translateX(0); }
+  50%{ transform: translateY(-30px) translateX(20px); }
+}
+.hero-lines{ position:absolute; inset:0; width:100%; height:100%; opacity:0.4; }
+.hero-lines path{ fill:none; stroke-width:2; }
+#heroLine1{ stroke: var(--teal); }
+#heroLine2{ stroke: var(--amber); }
 
-  /* ---------- SKILLS ---------- */
-  .skills-grid{
-    display:grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-    background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow:hidden;
-  }
-  .skill{ background: var(--ink-2); padding: 28px; }
-  .skill h4{
-    font-family:'Space Grotesk', sans-serif; font-weight: 600; font-size: 17px; color: var(--paper);
-    margin-bottom: 6px;
-  }
-  .skill .tag{ font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--amber); margin-bottom: 12px; display:block; }
-  .skill ul{ list-style: none; }
-  .skill li{
-    font-size: 13.5px; color: var(--paper-dim); padding: 6px 0 6px 14px; position: relative;
-  }
-  .skill li::before{
-    content:''; position:absolute; left:0; top: 14px; width:5px; height:1px; background: var(--paper-faint);
-  }
+.hero-inner{
+  position: relative; z-index: 1;
+  display:grid; grid-template-columns: 1.3fr 0.9fr; gap: 60px; align-items:center;
+}
+.eyebrow{
+  font-family:'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 18px; display:flex; align-items:center; gap:10px;
+}
+.eyebrow::before{ content:''; width:20px; height:1px; background: var(--teal); }
+.hero-text h1{ font-size: clamp(32px, 4.6vw, 50px); line-height: 1.1; }
+.hero-role{ margin-top: 10px; font-size: clamp(20px, 2.6vw, 28px); color: var(--amber); font-weight: 500; min-height: 34px; }
+.cursor{ animation: blink 1s step-start infinite; color: var(--amber); }
+@keyframes blink{ 50%{ opacity: 0; } }
+.hero-sub{ margin-top: 20px; max-width: 540px; font-size: 17px; color: var(--text-dim); }
+.hero-stats{ margin-top: 40px; display:flex; gap: 40px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 24px; }
+.hstat{ display:flex; flex-direction: column; }
+.hstat .num{ font-family:'IBM Plex Mono', monospace; font-size: 26px; color: var(--amber); }
+.hstat .lbl{ font-size: 12.5px; color: var(--text-faint); margin-top: 4px; }
+.hero-actions{ margin-top: 40px; display:flex; gap: 14px; flex-wrap: wrap; }
 
-  .tools{ margin-top: 32px; }
-  .tools-label{
-    font-family:'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--paper-faint); margin-bottom: 14px;
-  }
-  .tools-row{ display:flex; flex-wrap: wrap; gap: 10px; }
-  .tool-chip{
-    font-family:'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--paper-dim);
-    border: 1px solid var(--line); padding: 8px 14px; border-radius: 3px;
-  }
+.hero-photo{ display:flex; justify-content:center; position: relative; }
+.photo-ring{
+  width: 280px; height: 280px; border-radius: 50%;
+  border: 1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; position: relative;
+  background: linear-gradient(160deg, var(--amber-soft), var(--teal-soft));
+}
+.photo-placeholder{
+  width: 220px; height: 220px; border-radius: 50%;
+  background: var(--bg-3); border: 1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; color: var(--text-faint);
+}
+.badge{
+  position: absolute; font-family:'IBM Plex Mono', monospace; font-size: 12px;
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: 20px;
+  padding: 8px 14px; box-shadow: var(--shadow);
+}
+.badge-1{ top: 10px; left: -20px; color: var(--teal); }
+.badge-2{ bottom: 60px; right: -30px; color: var(--amber); }
+.badge-3{ bottom: -10px; left: 30px; color: var(--text); }
 
-  /* ---------- CONTACT ---------- */
-  .contact{
-    padding: 96px 0 100px;
-    border-top: 1px solid var(--line);
-  }
-  .contact h2{ font-size: clamp(30px, 5vw, 46px); max-width: 640px; }
-  .contact p{ margin-top: 16px; color: var(--paper-dim); max-width: 520px; font-size: 16px; }
-  .contact-actions{ margin-top: 36px; display:flex; gap: 16px; flex-wrap: wrap; }
-  .btn{
-    display:inline-flex; align-items:center; gap: 8px; padding: 14px 26px;
-    border-radius: 4px; font-size: 14px; font-weight: 500;
-  }
-  .btn-primary{ background: var(--amber); color: #2A1B04; }
-  .btn-primary:hover{ background: #f0b458; }
-  .btn-ghost{ border: 1px solid var(--line); color: var(--paper); }
-  .btn-ghost:hover{ border-color: var(--paper-dim); }
-  footer{
-    border-top: 1px solid var(--line); padding: 28px 0;
-    font-size: 13px; color: var(--paper-faint); display:flex; justify-content: space-between;
-  }
-  .contact-meta{
-    margin-top: 32px; display:flex; gap: 28px; flex-wrap: wrap;
-    font-family:'IBM Plex Mono', monospace; font-size: 13px; color: var(--paper-faint);
-    border-top: 1px solid var(--line); padding-top: 24px;
-  }
+.scroll-cue{
+  position:absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+  width: 26px; height: 42px; border: 1px solid var(--line); border-radius: 20px;
+  display:flex; align-items:flex-start; justify-content:center; padding-top: 8px;
+}
+.scroll-cue span{ width: 4px; height: 8px; background: var(--amber); border-radius: 2px; animation: scrollDown 1.6s ease infinite; }
+@keyframes scrollDown{ 0%{ opacity:1; transform: translateY(0);} 100%{ opacity:0; transform: translateY(14px);} }
 
-  @media (max-width: 760px){
-    .hero-stats{ grid-template-columns: 1fr; }
-    .hstat{ border-right:none; border-bottom: 1px solid var(--line); padding: 20px 0; }
-    .case-stats{ grid-template-columns: repeat(2, 1fr); }
-    .skills-grid{ grid-template-columns: 1fr; }
-    .navlinks{ display:none; }
-    footer{ flex-direction: column; gap: 8px; }
-  }
+/* =========================================================
+   SECTION HEADS
+========================================================= */
+.sec-head{ max-width: 640px; margin-bottom: 50px; }
+.sec-tag{
+  font-family:'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 14px;
+}
+.sec-head h2{ font-size: clamp(26px, 3.6vw, 38px); }
+.sec-head p{ margin-top: 14px; color: var(--text-dim); font-size: 16px; }
 
-  .reveal{ opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.in{ opacity: 1; transform: translateY(0); }
+/* =========================================================
+   ABOUT
+========================================================= */
+.about-grid{ display:grid; grid-template-columns: 1.4fr 1fr; gap: 50px; }
+.about-text{ color: var(--text-dim); font-size: 16px; }
+.about-expertise{ display:flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+.exp-tag{
+  font-family:'IBM Plex Mono', monospace; font-size: 12.5px; padding: 9px 14px;
+  border: 1px solid var(--line); border-radius: 20px; color: var(--text-dim); height: fit-content;
+}
+
+/* =========================================================
+   SKILLS
+========================================================= */
+.skills-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.skill-card{
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 22px; transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.skill-card:hover{ transform: translateY(-4px); border-color: var(--teal); }
+.skill-icon{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--amber); margin-bottom: 10px; }
+.skill-card h4{ font-size: 15.5px; margin-bottom: 4px; }
+.skill-card p{ font-size: 12.5px; color: var(--text-faint); }
+
+/* =========================================================
+   SERVICES
+========================================================= */
+.services-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.service-card{
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 30px; transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.service-card:hover{ transform: translateY(-6px); box-shadow: var(--shadow); }
+.service-num{ font-family:'IBM Plex Mono', monospace; font-size: 13px; color: var(--teal); margin-bottom: 14px; }
+.service-card h4{ font-size: 18px; margin-bottom: 10px; }
+.service-card p{ font-size: 14px; color: var(--text-dim); }
+
+/* =========================================================
+   EXPERIENCE / TIMELINE
+========================================================= */
+.timeline{ position: relative; padding-left: 30px; border-left: 1px solid var(--line); }
+.tl-item{ position: relative; padding-bottom: 46px; }
+.tl-item:last-child{ padding-bottom: 0; }
+.tl-dot{
+  position: absolute; left: -35px; top: 4px; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--amber); box-shadow: 0 0 0 4px var(--amber-soft);
+}
+.tl-date{ font-family:'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--teal); }
+.tl-content h4{ font-size: 19px; margin-top: 6px; }
+.tl-company{ font-size: 13px; color: var(--text-faint); display:block; margin: 4px 0 12px; }
+.tl-content ul{ padding-left: 18px; }
+.tl-content li{ font-size: 14.5px; color: var(--text-dim); list-style: disc; margin-bottom: 6px; }
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+.projects-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.project-card{
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.project-card:hover{ transform: translateY(-6px); box-shadow: var(--shadow); }
+.project-img{
+  height: 160px; background: var(--bg-3); display:flex; align-items:center; justify-content:center;
+  color: var(--text-faint); font-size: 13px; font-family:'IBM Plex Mono', monospace;
+  border-bottom: 1px solid var(--line);
+}
+.project-body{ padding: 24px; }
+.project-body h4{ font-size: 16.5px; margin-bottom: 8px; }
+.project-body p{ font-size: 13.5px; color: var(--text-dim); margin-bottom: 16px; }
+.tech-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom: 18px; }
+.tech-row span{
+  font-family:'IBM Plex Mono', monospace; font-size: 11px; padding: 5px 10px;
+  background: var(--bg-3); border: 1px solid var(--line); border-radius: 4px; color: var(--text-dim);
+}
+.project-link{ font-size: 13.5px; color: var(--amber); font-weight: 600; }
+.project-link:hover{ color: var(--teal); }
+
+/* =========================================================
+   CASE STUDIES
+========================================================= */
+.case{
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 44px; margin-bottom: 36px;
+}
+.case-chip{
+  display:inline-block; font-family:'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px;
+  border: 1px solid var(--teal); color: var(--teal); border-radius: 3px; margin-bottom: 18px;
+}
+.case-header h3{ font-size: 24px; max-width: 640px; }
+.case-stages{ margin-top: 34px; display:grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+.stage{ border-top: 2px solid var(--line); padding-top: 14px; }
+.stage-label{
+  display:block; font-family:'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 10px;
+}
+.stage p{ font-size: 13.5px; color: var(--text-dim); }
+.case-stats{
+  margin-top: 34px; display:grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow:hidden;
+}
+.cstat{ background: var(--bg-3); padding: 20px 16px; display:flex; flex-direction:column; }
+.cstat .num{ font-family:'IBM Plex Mono', monospace; font-size: 22px; color: var(--amber); }
+.cstat .lbl{ font-size: 12px; color: var(--text-faint); margin-top: 4px; }
+.case-shot{ margin-top: 30px; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.shot-cap{
+  font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-faint);
+  padding: 10px 14px; background: var(--bg-3); border-top: 1px solid var(--line);
+}
+.query-list{ margin-top: 26px; }
+.qlabel{ font-size: 12px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.08em; display:block; margin-bottom: 10px; }
+.qrow{ display:flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.qrow:last-child{ border-bottom: 1px solid var(--line); }
+.qrow .c{ font-family:'IBM Plex Mono', monospace; color: var(--text-dim); }
+
+.leadchart{ margin-top: 30px; }
+.leadchart-bars{ display:flex; align-items:flex-end; gap: 6px; height: 120px; border-bottom: 1px solid var(--line); }
+.leadchart-bars .bar{
+  flex:1; background: var(--teal); border-radius: 2px 2px 0 0; opacity: 0.85;
+  transform: scaleY(0); transform-origin: bottom; transition: transform 0.6s ease;
+}
+.leadchart-cap{ margin-top: 10px; font-size: 12px; color: var(--text-faint); font-family:'IBM Plex Mono', monospace; display:flex; justify-content: space-between; }
+
+.tools-used{ margin-top: 30px; }
+.tools-label{ font-family:'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 14px; display:block; }
+.tools-row{ display:flex; flex-wrap: wrap; gap: 10px; }
+.tool-chip{ font-family:'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--text-dim); border: 1px solid var(--line); padding: 8px 14px; border-radius: 4px; }
+
+/* =========================================================
+   TOOLS & TECHNOLOGIES
+========================================================= */
+.tools-grid{ display:grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.tool-card{
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px;
+  padding: 20px 10px; text-align:center; font-size: 13px; color: var(--text-dim);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.tool-card:hover{ transform: translateY(-3px); border-color: var(--amber); color: var(--text); }
+
+/* =========================================================
+   CONTACT
+========================================================= */
+.contact-grid{ display:grid; grid-template-columns: 1.2fr 1fr; gap: 50px; }
+.contact-form{ display:flex; flex-direction: column; gap: 18px; }
+.contact-form label{ font-size: 13px; color: var(--text-dim); display:flex; flex-direction: column; gap: 8px; }
+.contact-form input, .contact-form textarea{
+  font-family: 'Inter', sans-serif; font-size: 14px; padding: 13px 14px;
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: 6px; color: var(--text);
+  resize: vertical;
+}
+.contact-form input:focus, .contact-form textarea:focus{ outline: none; border-color: var(--amber); }
+.contact-form button{ width: fit-content; }
+.form-note{ font-size: 13px; color: var(--teal); min-height: 18px; }
+.contact-info{ display:flex; flex-direction: column; gap: 22px; }
+.info-row{ display:flex; flex-direction: column; gap: 4px; border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+.info-label{ font-family:'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); }
+.info-row a{ font-size: 15px; }
+.info-row a:hover{ color: var(--amber); }
+
+/* =========================================================
+   FOOTER
+========================================================= */
+footer{ border-top: 1px solid var(--line); padding-top: 60px; }
+.footer-inner{ display:grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; padding-bottom: 40px; }
+.footer-col p{ font-size: 13px; color: var(--text-faint); margin-top: 10px; max-width: 220px; }
+.footer-title{ display:block; font-family:'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin-bottom: 14px; }
+.footer-col a{ display:block; font-size: 14px; color: var(--text-dim); padding: 5px 0; }
+.footer-col a:hover{ color: var(--amber); }
+.footer-bottom{
+  border-top: 1px solid var(--line); padding: 22px 0; display:flex; justify-content: space-between;
+  font-size: 13px; color: var(--text-faint);
+}
+
+/* =========================================================
+   SCROLL TO TOP
+========================================================= */
+.scroll-top{
+  position: fixed; bottom: 26px; right: 26px; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--amber); color: #221505; border: none; font-size: 18px; cursor: pointer;
+  display:flex; align-items:center; justify-content:center; box-shadow: var(--shadow);
+  opacity: 0; pointer-events: none; transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease; z-index: 90;
+}
+.scroll-top.show{ opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+.reveal{ opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.in{ opacity: 1; transform: translateY(0); }
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 980px){
+  .hero-inner{ grid-template-columns: 1fr; }
+  .hero-photo{ order: -1; }
+  .about-grid{ grid-template-columns: 1fr; }
+  .skills-grid{ grid-template-columns: repeat(3, 1fr); }
+  .services-grid{ grid-template-columns: repeat(2, 1fr); }
+  .projects-grid{ grid-template-columns: repeat(2, 1fr); }
+  .case-stages{ grid-template-columns: repeat(2, 1fr); }
+  .tools-grid{ grid-template-columns: repeat(4, 1fr); }
+  .contact-grid{ grid-template-columns: 1fr; }
+  .footer-inner{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px){
+  section{ padding: 80px 0; }
+  .navlinks{
+    position: fixed; top: 72px; left: 0; right: 0; background: var(--bg-2);
+    flex-direction: column; padding: 20px 32px; gap: 4px; border-bottom: 1px solid var(--line);
+    transform: translateY(-150%); transition: transform 0.3s ease; z-index: 99;
+  }
+  .navlinks.open{ transform: translateY(0); }
+  .navlinks a{ padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .hamburger{ display:flex; }
+  .hero-stats{ gap: 24px; }
+  .skills-grid{ grid-template-columns: repeat(2, 1fr); }
+  .services-grid{ grid-template-columns: 1fr; }
+  .projects-grid{ grid-template-columns: 1fr; }
+  .case{ padding: 26px; }
+  .case-stages{ grid-template-columns: 1fr; }
+  .case-stats{ grid-template-columns: repeat(2, 1fr); }
+  .tools-grid{ grid-template-columns: repeat(3, 1fr); }
+  .badge{ display: none; }
+}
+
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
-    <div class="logo">P<span>S</span>B</div>
-    <div class="navlinks">
-      <a href="#work">Work</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
+<!-- ================= NAV ================= -->
+<nav id="navbar">
+  <div class="wrap nav-inner">
+    <a href="#hero" class="logo">P<span>S</span>B</a>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#case-studies">Case Studies</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark and light mode">
+        <svg id="iconMoon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg id="iconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <a class="nav-cta" href="#contact">Get in touch</a>
   </div>
 </nav>
 
-<section class="hero">
-  <svg class="hero-chart" viewBox="0 0 1080 420" preserveAspectRatio="none">
-    <path id="line1" d="M0,340 C120,320 180,300 260,280 C340,260 380,240 460,220 C540,200 580,180 660,160 C740,140 780,110 860,90 C940,70 1000,55 1080,30" stroke="#49C5B1"/>
-    <path id="line2" d="M0,380 C120,370 180,360 260,350 C340,340 380,325 460,310 C540,295 580,275 660,255 C740,235 780,210 860,190 C940,170 1000,150 1080,120" stroke="#E8A33D"/>
-  </svg>
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <svg class="hero-lines" viewBox="0 0 1200 500" preserveAspectRatio="none">
+      <path id="heroLine1" d="M0,400 C150,380 220,340 320,310 C420,280 480,250 580,220 C680,190 740,150 850,120 C950,95 1050,70 1200,40" />
+      <path id="heroLine2" d="M0,450 C150,440 220,420 320,400 C420,380 480,355 580,330 C680,305 740,270 850,240 C950,215 1050,190 1200,150" />
+    </svg>
+  </div>
+
   <div class="wrap hero-inner">
-    <div class="eyebrow">SEO &middot; Meta ads &middot; Google ads (PPC)</div>
-    <h1>Pawan Singh Boura</h1>
-    <p class="hero-sub">I turn search intent and ad spend into a repeatable stream of clicks and leads — measured in Search Console and Ads Manager, not guessed at.</p>
-    <div class="hero-stats">
-      <div class="hstat"><div class="num">183K</div><div class="lbl">Organic clicks, 12 months</div></div>
-      <div class="hstat"><div class="num">13.1M</div><div class="lbl">Search impressions, 12 months</div></div>
-      <div class="hstat"><div class="num">20&ndash;30</div><div class="lbl">Meta leads generated daily</div></div>
+    <div class="hero-text reveal">
+      <div class="eyebrow">Digital Marketing Professional &middot; 3 Years Experience</div>
+      <h1>Hi, I'm <span class="accent-text">Pawan Singh Boura</span></h1>
+      <h2 class="hero-role"><span id="typedRole">SEO Specialist</span><span class="cursor">|</span></h2>
+      <p class="hero-sub">I help brands get found, get clicked, and get leads — through search rankings, Google Ads, and Meta Ads campaigns backed by real data, not guesswork.</p>
+      <div class="hero-stats">
+        <div class="hstat"><span class="num">183K+</span><span class="lbl">Organic clicks driven</span></div>
+        <div class="hstat"><span class="num">13.1M+</span><span class="lbl">Search impressions</span></div>
+        <div class="hstat"><span class="num">20&ndash;30</span><span class="lbl">Daily leads generated</span></div>
+      </div>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="assets/Pawan-Singh-Boura-Resume.pdf" class="btn btn-ghost" download>Download Resume</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+
+    <div class="hero-photo reveal">
+      <div class="photo-ring">
+        <div class="photo-placeholder">
+          <span>PSB</span>
+        </div>
+        <div class="badge badge-1">SEO</div>
+        <div class="badge badge-2">Google Ads</div>
+        <div class="badge badge-3">Meta Ads</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-cue" aria-label="Scroll down">
+    <span></span>
+  </a>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">About Me</div>
+      <h2>Three years of turning search &amp; ad platforms into growth</h2>
+    </div>
+    <div class="about-grid reveal">
+      <p class="about-text">
+        I'm a Digital Marketing Professional with 3 years of hands-on experience across SEO and paid media. I specialize in Technical SEO, On-Page and Off-Page SEO, and Local SEO, building the kind of search visibility that compounds over time instead of fading after a campaign ends. Alongside organic growth, I run performance-driven Google Ads and Meta Ads campaigns, and I'm comfortable working across WordPress websites — from build and design through to speed optimization.
+        <br><br>
+        My approach is grounded in data: keyword research and competitor analysis inform strategy, Google Search Console and Google Analytics tell me what's actually working, and link building rounds out the authority side of SEO. Whether the goal is more organic traffic or a steady flow of qualified leads, I treat every campaign like a report card — read the numbers, cut what isn't working, scale what is.
+      </p>
+      <div class="about-expertise">
+        <div class="exp-tag">SEO</div>
+        <div class="exp-tag">Technical SEO</div>
+        <div class="exp-tag">On-Page SEO</div>
+        <div class="exp-tag">Off-Page SEO</div>
+        <div class="exp-tag">Local SEO</div>
+        <div class="exp-tag">Google Ads</div>
+        <div class="exp-tag">Website Design</div>
+        <div class="exp-tag">Website Development</div>
+        <div class="exp-tag">WordPress</div>
+        <div class="exp-tag">Speed Optimization</div>
+        <div class="exp-tag">Keyword Research</div>
+        <div class="exp-tag">Link Building</div>
+        <div class="exp-tag">Google Analytics</div>
+        <div class="exp-tag">Google Search Console</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="work">
+<!-- ================= SKILLS ================= -->
+<section id="skills">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-tag">Selected work</div>
-      <h2>Two channels, one habit: make the graph go up</h2>
-      <p>One client needed to be found. The other needed to be reached. Same discipline both times — test, read the data, cut what doesn't work, scale what does.</p>
+      <div class="sec-tag">Skills</div>
+      <h2>What I bring to a marketing team</h2>
     </div>
+    <div class="skills-grid reveal">
+      <div class="skill-card"><div class="skill-icon">01</div><h4>SEO</h4><p>Strategy &amp; execution end to end</p></div>
+      <div class="skill-card"><div class="skill-icon">02</div><h4>Technical SEO</h4><p>Crawlability, indexing, site health</p></div>
+      <div class="skill-card"><div class="skill-icon">03</div><h4>Google Ads</h4><p>Search campaigns &amp; bidding</p></div>
+      <div class="skill-card"><div class="skill-icon">04</div><h4>Meta Ads</h4><p>Lead ads &amp; audience testing</p></div>
+      <div class="skill-card"><div class="skill-icon">05</div><h4>WordPress</h4><p>Build, edit &amp; maintain sites</p></div>
+      <div class="skill-card"><div class="skill-icon">06</div><h4>HTML</h4><p>Semantic, clean markup</p></div>
+      <div class="skill-card"><div class="skill-icon">07</div><h4>CSS</h4><p>Responsive, modern styling</p></div>
+      <div class="skill-card"><div class="skill-icon">08</div><h4>JavaScript</h4><p>Light front-end interactivity</p></div>
+      <div class="skill-card"><div class="skill-icon">09</div><h4>Google Analytics</h4><p>Traffic &amp; behavior reporting</p></div>
+      <div class="skill-card"><div class="skill-icon">10</div><h4>Search Console</h4><p>Performance monitoring</p></div>
+      <div class="skill-card"><div class="skill-icon">11</div><h4>Ahrefs</h4><p>Backlink &amp; keyword analysis</p></div>
+      <div class="skill-card"><div class="skill-icon">12</div><h4>SEMrush</h4><p>Research &amp; site auditing</p></div>
+      <div class="skill-card"><div class="skill-icon">13</div><h4>Screaming Frog</h4><p>Technical site crawling</p></div>
+      <div class="skill-card"><div class="skill-icon">14</div><h4>Git &amp; GitHub</h4><p>Version control basics</p></div>
+      <div class="skill-card"><div class="skill-icon">15</div><h4>Canva</h4><p>Quick creative assets</p></div>
+      <div class="skill-card"><div class="skill-icon">16</div><h4>Figma</h4><p>Design collaboration</p></div>
+    </div>
+  </div>
+</section>
 
-    <div class="case reveal">
-      <div class="case-top">
-        <div>
-          <div class="case-chip">Case study &middot; Organic search / SEO</div>
-          <h3>Turning long-tail trek searches into 183K clicks</h3>
-          <div class="case-client">Client: thesearchingsouls.com — trekking &amp; travel content site</div>
+<!-- ================= SERVICES ================= -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Services</div>
+      <h2>How I can help your business grow</h2>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h4>SEO</h4>
+        <p>Full-funnel organic strategy built around real search intent and long-term ranking growth.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h4>Technical SEO Audit</h4>
+        <p>Deep site audits covering crawlability, indexing, Core Web Vitals, and structural issues.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h4>Google Ads</h4>
+        <p>Search campaigns built for efficient spend, clear tracking, and steady conversions.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h4>Local SEO</h4>
+        <p>Google Business Profile optimization and local pack visibility for location-based businesses.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <h4>Website Design</h4>
+        <p>Clean, conversion-focused layouts designed with the end user in mind.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <h4>Website Development</h4>
+        <p>Fast, functional sites built on solid HTML/CSS foundations.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">07</div>
+        <h4>WordPress Development</h4>
+        <p>Custom WordPress builds, theme edits, and ongoing site maintenance.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">08</div>
+        <h4>Speed Optimization</h4>
+        <p>Faster load times through image, code, and hosting-level optimization.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">09</div>
+        <h4>Link Building</h4>
+        <p>Sustainable, relevant backlink acquisition to build domain authority.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Experience</div>
+      <h2>3 years, one steady climb</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">2024 &ndash; Present</span>
+          <h4>Digital Marketing Executive</h4>
+          <span class="tl-company">Company Name &middot; Edit this</span>
+          <ul>
+            <li>Manage end-to-end SEO for client websites, including technical audits and content strategy</li>
+            <li>Run and optimize Google Ads and Meta Ads lead generation campaigns</li>
+            <li>Report performance weekly using Search Console, GA4, and SEMrush</li>
+          </ul>
         </div>
       </div>
-      <div class="case-body">
-        The site was invisible for the exact searches its readers were already typing — specific Himalayan treks like Dayara Bugyal and Brahmatal, not generic travel terms. Over 12 months I rebuilt the site's technical SEO foundation and content structure around these long-tail queries, then kept optimizing month over month as the data came in. The result is a steady, compounding climb in both impressions and clicks, visible directly in Search Console.
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">2023 &ndash; 2024</span>
+          <h4>SEO Executive</h4>
+          <span class="tl-company">Company Name &middot; Edit this</span>
+          <ul>
+            <li>Executed on-page and off-page SEO for multiple client accounts</li>
+            <li>Conducted keyword research and competitor gap analysis</li>
+            <li>Assisted with WordPress site edits and speed optimization</li>
+          </ul>
+        </div>
       </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">2022 &ndash; 2023</span>
+          <h4>Marketing Associate (Entry Level)</h4>
+          <span class="tl-company">Company Name &middot; Edit this</span>
+          <ul>
+            <li>Supported SEO and social media efforts for small business clients</li>
+            <li>Learned Google Ads and Meta Ads fundamentals on live accounts</li>
+            <li>Built reporting habits around GSC and Google Analytics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURED PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Featured Projects</div>
+      <h2>Campaigns &amp; sites I've worked on</h2>
+    </div>
+    <div class="projects-grid reveal">
+      <div class="project-card">
+        <div class="project-img">Screenshot placeholder</div>
+        <div class="project-body">
+          <h4>The Searching Souls &mdash; SEO Growth</h4>
+          <p>Ranked long-tail trekking keywords and grew organic clicks from near-zero to 183K+ in 12 months.</p>
+          <div class="tech-row"><span>SEO</span><span>Search Console</span><span>Content Strategy</span></div>
+          <a href="#case-studies" class="project-link">View Case Study &rarr;</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img">Screenshot placeholder</div>
+        <div class="project-body">
+          <h4>Tour Operator &mdash; Meta Lead Ads</h4>
+          <p>Built a Meta lead ad system generating 20&ndash;30 daily leads on a lean, consistent budget.</p>
+          <div class="tech-row"><span>Meta Ads</span><span>Lead Gen</span><span>Budget Scaling</span></div>
+          <a href="#case-studies" class="project-link">View Case Study &rarr;</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img">Screenshot placeholder</div>
+        <div class="project-body">
+          <h4>Project Title &mdash; Edit This</h4>
+          <p>Short description of another campaign, site, or project you've worked on goes here.</p>
+          <div class="tech-row"><span>Google Ads</span><span>WordPress</span></div>
+          <a href="#" class="project-link">View Project &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CASE STUDIES ================= -->
+<section id="case-studies">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Case Studies</div>
+      <h2>The full story behind the numbers</h2>
+    </div>
+
+    <!-- CASE STUDY 1 -->
+    <div class="case reveal">
+      <div class="case-chip">Case Study 01 &middot; Organic Search / SEO</div>
+      <div class="case-header">
+        <h3>thesearchingsouls.com &mdash; 183K clicks from long-tail trek SEO</h3>
+      </div>
+
+      <div class="case-stages">
+        <div class="stage">
+          <span class="stage-label">Client Overview</span>
+          <p>A trekking &amp; travel content site targeting Himalayan trek routes (Dayara Bugyal, Brahmatal, and similar), competing against larger, better-known travel publishers.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-label">Challenge</span>
+          <p>The site was invisible for the exact long-tail searches its future readers were already typing, and had no structured technical SEO foundation to build on.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-label">Strategy</span>
+          <p>Prioritize long-tail, high-intent trek queries over generic travel terms; fix technical SEO issues first; restructure content around search intent.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-label">Implementation</span>
+          <p>Ran a full technical SEO audit and fixes, rebuilt on-page structure around target keywords, and monitored Search Console weekly to guide ongoing content and internal linking decisions over 12 months.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-label">Results</span>
+          <p>Steady, compounding month-over-month growth in both impressions and clicks, with several trek-specific queries now ranking on page one.</p>
+        </div>
+      </div>
+
       <div class="case-stats">
-        <div class="cstat"><div class="num">183K</div><div class="lbl">Total clicks (12 mo)</div></div>
-        <div class="cstat"><div class="num">13.1M</div><div class="lbl">Total impressions</div></div>
-        <div class="cstat"><div class="num">1.4%</div><div class="lbl">Average CTR</div></div>
-        <div class="cstat"><div class="num">6.9</div><div class="lbl">Average position</div></div>
+        <div class="cstat"><span class="num">183K</span><span class="lbl">Total clicks (12 mo)</span></div>
+        <div class="cstat"><span class="num">13.1M</span><span class="lbl">Total impressions</span></div>
+        <div class="cstat"><span class="num">1.4%</span><span class="lbl">Average CTR</span></div>
+        <div class="cstat"><span class="num">6.9</span><span class="lbl">Average position</span></div>
       </div>
+
       <div class="case-shot">
-        <img src="/gsc-case-study.png.png" alt="Google Search Console performance report for thesearchingsouls.com showing 183K clicks and 13.1M impressions over 12 months">
+        <img src="./gsc-case-study.png.png" alt="Google Search Console performance report for thesearchingsouls.com showing 183K clicks and 13.1M impressions over 12 months" loading="lazy">
         <div class="shot-cap">Google Search Console &middot; thesearchingsouls.com &middot; trailing 12 months</div>
       </div>
+
       <div class="query-list">
-        <div class="qlabel">Top performing queries</div>
+        <span class="qlabel">Top performing queries</span>
         <div class="qrow"><span class="q">the searching souls</span><span class="c">17,866 clicks</span></div>
         <div class="qrow"><span class="q">searching souls</span><span class="c">9,732 clicks</span></div>
         <div class="qrow"><span class="q">dayara bugyal trek</span><span class="c">3,776 clicks</span></div>
         <div class="qrow"><span class="q">brahmatal trek</span><span class="c">3,269 clicks</span></div>
       </div>
-    </div>
 
-    <div class="case reveal">
-      <div class="case-top">
-        <div>
-          <div class="case-chip">Case study &middot; Meta ads / Lead generation</div>
-          <h3>20&ndash;30 leads a day, every day, on &#8377;600&ndash;700 in spend</h3>
-          <div class="case-client">Client: Tour &amp; travel operator — Meta lead ads</div>
+      <div class="tools-used">
+        <span class="tools-label">Tools Used</span>
+        <div class="tools-row">
+          <span class="tool-chip">Google Search Console</span>
+          <span class="tool-chip">SEMrush</span>
+          <span class="tool-chip">Google Analytics</span>
         </div>
       </div>
-      <div class="case-body">
-        This client needed a steady flow of qualified leads without ballooning ad spend. I built and ran Meta lead ad campaigns, tested audiences and creative until cost per lead stabilized, and scaled the daily budget gradually rather than all at once. The campaign now runs on a modest &#8377;600&ndash;700 daily budget and consistently delivers 20&ndash;30 leads a day, with output continuing to grow as the account matures.
+    </div>
+
+    <!-- CASE STUDY 2 -->
+    <div class="case reveal">
+      <div class="case-chip">Case Study 02 &middot; Meta Ads / Lead Generation</div>
+      <div class="case-header">
+        <h3>Tour Operator &mdash; 20&ndash;30 daily leads on &#8377;600&ndash;700 spend</h3>
       </div>
+
+      <div class="case-stages">
+        <div class="stage">
+          <span class="stage-label">Client Overview</span>
+          <p>A tour &amp; travel operator needing a predictable, affordable flow of qualified leads through Meta lead ads.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-label">Challenge</span>
+          <p>No consistent lead flow, and a limited daily budget that needed to work efficiently from day one rather than "spend big and hope."</p>
+        </div>
+        <div class="stage">
+          <span class="stage-label">Strategy</span>
+          <p>Start lean, test audiences and creatives quickly, and scale budget only once cost per lead was stable and predictable.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-label">Implementation</span>
+          <p>Built Meta lead ad campaigns, ran structured creative and audience tests, and increased the daily budget gradually as performance data came in.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-label">Results</span>
+          <p>A consistent 20&ndash;30 leads per day on a &#8377;600&ndash;700 daily budget, with lead volume continuing to grow as the account matures.</p>
+        </div>
+      </div>
+
       <div class="case-stats">
-        <div class="cstat"><div class="num">20&ndash;30</div><div class="lbl">Leads / day</div></div>
-        <div class="cstat"><div class="num">&#8377;600&ndash;700</div><div class="lbl">Daily ad budget</div></div>
-        <div class="cstat"><div class="num">&#8377;20&ndash;30</div><div class="lbl">Approx. cost / lead</div></div>
-        <div class="cstat"><div class="num">&#8593;</div><div class="lbl">Still scaling</div></div>
+        <div class="cstat"><span class="num">20&ndash;30</span><span class="lbl">Leads / day</span></div>
+        <div class="cstat"><span class="num">&#8377;600&ndash;700</span><span class="lbl">Daily ad budget</span></div>
+        <div class="cstat"><span class="num">&#8377;20&ndash;30</span><span class="lbl">Approx. cost / lead</span></div>
+        <div class="cstat"><span class="num">&#8593;</span><span class="lbl">Still scaling</span></div>
       </div>
+
       <div class="leadchart">
         <div class="leadchart-bars" id="leadBars"></div>
         <div class="leadchart-cap"><span>Week 1</span><span>Illustrative daily lead trend</span><span>Week 8</span></div>
       </div>
+
+      <div class="tools-used">
+        <span class="tools-label">Tools Used</span>
+        <div class="tools-row">
+          <span class="tool-chip">Meta Ads Manager</span>
+          <span class="tool-chip">Google Analytics</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="skills">
+<!-- ================= TOOLS & TECHNOLOGIES ================= -->
+<section id="tools">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-tag">How I work</div>
-      <h2>Three channels, one dashboard mindset</h2>
-      <p>Every campaign gets read like a report — what moved, why, and what to change next.</p>
+      <div class="sec-tag">Tools &amp; Technologies</div>
+      <h2>What's in my day-to-day toolkit</h2>
     </div>
-    <div class="skills-grid reveal">
-      <div class="skill">
-        <span class="tag">01</span>
-        <h4>SEO</h4>
-        <ul>
-          <li>Keyword &amp; search-intent research</li>
-          <li>Technical SEO audits &amp; fixes</li>
-          <li>Content structure &amp; on-page optimization</li>
-          <li>Search Console monitoring &amp; reporting</li>
-        </ul>
-      </div>
-      <div class="skill">
-        <span class="tag">02</span>
-        <h4>Google Ads (PPC)</h4>
-        <ul>
-          <li>Search campaign build &amp; structure</li>
-          <li>Bidding strategy &amp; budget pacing</li>
-          <li>Conversion tracking setup</li>
-          <li>Ongoing bid &amp; keyword optimization</li>
-        </ul>
-      </div>
-      <div class="skill">
-        <span class="tag">03</span>
-        <h4>Meta ads</h4>
-        <ul>
-          <li>Lead ad campaign setup</li>
-          <li>Audience &amp; creative testing</li>
-          <li>Cost-per-lead optimization</li>
-          <li>Gradual budget scaling</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="tools reveal">
-      <div class="tools-label">Tools</div>
-      <div class="tools-row">
-        <span class="tool-chip">SEMrush</span>
-        <span class="tool-chip">Google Ads</span>
-        <span class="tool-chip">Google Search Console</span>
-        <span class="tool-chip">Google Analytics</span>
-      </div>
+    <div class="tools-grid reveal">
+      <div class="tool-card"><span>Google Search Console</span></div>
+      <div class="tool-card"><span>Google Analytics</span></div>
+      <div class="tool-card"><span>Google Ads</span></div>
+      <div class="tool-card"><span>SEMrush</span></div>
+      <div class="tool-card"><span>Ahrefs</span></div>
+      <div class="tool-card"><span>Screaming Frog</span></div>
+      <div class="tool-card"><span>WordPress</span></div>
+      <div class="tool-card"><span>VS Code</span></div>
+      <div class="tool-card"><span>Git</span></div>
+      <div class="tool-card"><span>GitHub</span></div>
+      <div class="tool-card"><span>Canva</span></div>
+      <div class="tool-card"><span>Figma</span></div>
     </div>
   </div>
 </section>
 
+<!-- ================= CONTACT ================= -->
 <section id="contact">
-  <div class="wrap contact reveal">
-    <div class="sec-tag">Get in touch</div>
-    <h2>Have search traffic or ad spend that could work harder?</h2>
-    <p>I'm open to freelance and full-time roles across SEO, Google Ads, and Meta ads. Send over your site or your ad account and I'll tell you honestly what I'd change first.</p>
-    <div class="contact-actions">
-      <a class="btn btn-primary" href="mailto:pawanboura9696@gmail.com">Email me</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/pawan-boura/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-ghost" href="tel:+918368792310">+91 83687 92310</a>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Contact</div>
+      <h2>Let's grow something together</h2>
+      <p>Open to freelance projects and full-time roles across SEO, Google Ads, and Meta Ads.</p>
     </div>
-    <div class="contact-meta">
-      <span>pawanboura9696@gmail.com</span>
-      <span>Ayanagar, Delhi &ndash; 110047</span>
+    <div class="contact-grid reveal">
+      <form class="contact-form" id="contactForm">
+        <label>Name
+          <input type="text" name="name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" required>
+        </label>
+        <label>Message
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <p class="form-note" id="formNote"></p>
+      </form>
+      <div class="contact-info">
+        <div class="info-row"><span class="info-label">Email</span><a href="mailto:pawanboura9696@gmail.com">pawanboura9696@gmail.com</a></div>
+        <div class="info-row"><span class="info-label">Phone</span><a href="tel:+918368792310">+91 83687 92310</a></div>
+        <div class="info-row"><span class="info-label">LinkedIn</span><a href="https://www.linkedin.com/in/pawan-boura/" target="_blank" rel="noopener">linkedin.com/in/pawan-boura</a></div>
+        <div class="info-row"><span class="info-label">GitHub</span><a href="#" target="_blank" rel="noopener">github.com/your-username</a></div>
+        <div class="info-row"><span class="info-label">Location</span><span>Ayanagar, Delhi &ndash; 110047</span></div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ================= FOOTER ================= -->
 <footer>
-  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
-    <span>Pawan Singh Boura &middot; Performance Marketer</span>
-    <span>Ayanagar, Delhi &middot; SEO &middot; Google Ads &middot; Meta ads</span>
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <div class="logo">P<span>S</span>B</div>
+      <p>Digital Marketing Professional &middot; SEO &middot; Google Ads &middot; Meta Ads</p>
+    </div>
+    <div class="footer-col">
+      <span class="footer-title">Navigate</span>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#services">Services</a>
+      <a href="#case-studies">Case Studies</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <span class="footer-title">Social</span>
+      <a href="https://www.linkedin.com/in/pawan-boura/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:pawanboura9696@gmail.com">Email</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; <span id="year"></span> Pawan Singh Boura. All rights reserved.</span>
+    <a href="#">Privacy Policy</a>
   </div>
 </footer>
 
-<script>
-  // reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
-  }, { threshold: 0.15 });
-  reveals.forEach(el=>io.observe(el));
+<button id="scrollTop" class="scroll-top" aria-label="Scroll to top">&uarr;</button>
 
-  // animate hero chart lines drawing in
-  window.addEventListener('load', ()=>{
-    ['line1','line2'].forEach((id, i)=>{
+<script>
+/* =========================================================
+   THEME TOGGLE (dark / light) — persisted via localStorage
+========================================================= */
+(function initTheme(){
+  const root = document.documentElement;
+  const iconMoon = document.getElementById('iconMoon');
+  const iconSun = document.getElementById('iconSun');
+  let saved = 'dark';
+  try{ saved = localStorage.getItem('psb-theme') || 'dark'; } catch(e){ /* storage unavailable */ }
+  root.setAttribute('data-theme', saved);
+  updateIcon(saved);
+
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const current = root.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    updateIcon(next);
+    try{ localStorage.setItem('psb-theme', next); } catch(e){ /* storage unavailable */ }
+  });
+
+  function updateIcon(theme){
+    if(theme === 'dark'){
+      iconMoon.style.display = 'block';
+      iconSun.style.display = 'none';
+    } else {
+      iconMoon.style.display = 'none';
+      iconSun.style.display = 'block';
+    }
+  }
+})();
+
+/* =========================================================
+   MOBILE NAV
+========================================================= */
+(function initMobileNav(){
+  const hamburger = document.getElementById('hamburger');
+  const navlinks = document.getElementById('navlinks');
+  hamburger.addEventListener('click', () => navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navlinks.classList.remove('open'));
+  });
+})();
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+(function initReveal(){
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){ entry.target.classList.add('in'); }
+    });
+  }, { threshold: 0.12 });
+  items.forEach(el => io.observe(el));
+})();
+
+/* =========================================================
+   TYPING EFFECT — HERO ROLE
+========================================================= */
+(function initTyping(){
+  const el = document.getElementById('typedRole');
+  const roles = ['SEO Specialist', 'Google Ads Expert', 'Meta Ads Strategist', 'Growth Marketer'];
+  let roleIndex = 0, charIndex = 0, deleting = false;
+
+  function tick(){
+    const word = roles[roleIndex];
+    if(!deleting){
+      charIndex++;
+      el.textContent = word.slice(0, charIndex);
+      if(charIndex === word.length){
+        deleting = true;
+        setTimeout(tick, 1400);
+        return;
+      }
+    } else {
+      charIndex--;
+      el.textContent = word.slice(0, charIndex);
+      if(charIndex === 0){
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+      }
+    }
+    setTimeout(tick, deleting ? 45 : 80);
+  }
+  tick();
+})();
+
+/* =========================================================
+   HERO BACKGROUND LINES — DRAW-IN ANIMATION
+========================================================= */
+(function initHeroLines(){
+  window.addEventListener('load', () => {
+    ['heroLine1','heroLine2'].forEach((id, i) => {
       const path = document.getElementById(id);
+      if(!path) return;
       const len = path.getTotalLength();
       path.style.strokeDasharray = len;
       path.style.strokeDashoffset = len;
       path.getBoundingClientRect();
-      path.style.transition = 'stroke-dashoffset 2.2s ease ' + (i*0.2) + 's';
-      requestAnimationFrame(()=>{ path.style.strokeDashoffset = 0; });
+      path.style.transition = 'stroke-dashoffset 2.4s ease ' + (i * 0.2) + 's';
+      requestAnimationFrame(() => { path.style.strokeDashoffset = 0; });
     });
   });
+})();
 
-  // illustrative bar chart for lead gen case study
-  const barsContainer = document.getElementById('leadBars');
+/* =========================================================
+   ILLUSTRATIVE LEAD-GEN BAR CHART (Case Study 2)
+========================================================= */
+(function initLeadChart(){
+  const container = document.getElementById('leadBars');
+  if(!container) return;
   const values = [14,16,15,18,20,19,22,24,23,26,25,28,27,30];
   const max = Math.max(...values);
-  values.forEach((v, i)=>{
+  values.forEach(v => {
     const bar = document.createElement('div');
     bar.className = 'bar';
-    bar.style.height = (v/max*100) + '%';
-    barsContainer.appendChild(bar);
+    bar.style.height = (v / max * 100) + '%';
+    container.appendChild(bar);
   });
-  const barIo = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        document.querySelectorAll('#leadBars .bar').forEach((b, i)=>{
-          setTimeout(()=>{ b.style.transform = 'scaleY(1)'; }, i*40);
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        document.querySelectorAll('#leadBars .bar').forEach((bar, i) => {
+          setTimeout(() => { bar.style.transform = 'scaleY(1)'; }, i * 40);
         });
-        barIo.disconnect();
+        io.disconnect();
       }
     });
   }, { threshold: 0.3 });
-  barIo.observe(barsContainer);
-</script>
+  io.observe(container);
+})();
 
+/* =========================================================
+   CONTACT FORM — DEMO SUBMIT (no backend wired up)
+========================================================= */
+(function initContactForm(){
+  const form = document.getElementById('contactForm');
+  const note = document.getElementById('formNote');
+  if(!form) return;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    note.textContent = 'This is a demo form — connect it to a form service (e.g. Formspree) or your own backend to receive messages.';
+    form.reset();
+  });
+})();
+
+/* =========================================================
+   SCROLL TO TOP BUTTON
+========================================================= */
+(function initScrollTop(){
+  const btn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 500){ btn.classList.add('show'); }
+    else{ btn.classList.remove('show'); }
+  });
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
+
+/* =========================================================
+   ACTIVE NAV LINK ON SCROLL
+========================================================= */
+(function initActiveNav(){
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.navlinks a');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.style.color = link.getAttribute('href') === '#' + id ? 'var(--amber)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(sec => io.observe(sec));
+})();
+
+/* =========================================================
+   FOOTER YEAR
+========================================================= */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+</script>
 </body>
 </html>
