@@ -342,7 +342,14 @@ nav{
 }
 .contact-form input:focus, .contact-form textarea:focus{ outline: none; border-color: var(--amber); }
 .contact-form button{ width: fit-content; }
-.form-note{ font-size: 13px; color: var(--teal); min-height: 18px; }
+.contact-form button:disabled{ opacity: 0.6; cursor: not-allowed; transform: none; }
+.hp-field{ position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.fs-success{ font-size: 14px; color: var(--teal); }
+.fs-success:empty, .fs-error:empty{ display: none; }
+.fs-error{ font-size: 13.5px; color: #E0674E; }
+.fs-field-error{ font-size: 12.5px; color: #E0674E; display: block; min-height: 0; }
+.fs-field-error:empty{ display: none; }
+[aria-invalid="true"]{ border-color: #E0674E !important; }
 .contact-info{ display:flex; flex-direction: column; gap: 22px; }
 .info-row{ display:flex; flex-direction: column; gap: 4px; border-bottom: 1px solid var(--line); padding-bottom: 18px; }
 .info-label{ font-family:'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); }
@@ -747,7 +754,7 @@ footer{ border-top: 1px solid var(--line); padding-top: 60px; }
       </div>
 
       <div class="case-shot">
-        <img src="./gsc-case-study.png.png" alt="Google Search Console performance report for thesearchingsouls.com showing 183K clicks and 13.1M impressions over 12 months" loading="lazy">
+        <img src="assets/gsc-case-study.png" alt="Google Search Console performance report for thesearchingsouls.com showing 183K clicks and 13.1M impressions over 12 months" loading="lazy">
         <div class="shot-cap">Google Search Console &middot; thesearchingsouls.com &middot; trailing 12 months</div>
       </div>
 
@@ -855,20 +862,25 @@ footer{ border-top: 1px solid var(--line); padding-top: 60px; }
       <p>Open to freelance projects and full-time roles across SEO, Google Ads, and Meta Ads.</p>
     </div>
     <div class="contact-grid reveal">
-      <form
-  action="https://formspree.io/f/mwvgpead"
-  method="POST">
-        <label>Name
-          <input type="text" name="name" required>
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/mwvgpead" method="POST">
+        <div data-fs-success class="fs-success"></div>
+        <div data-fs-error class="fs-error"></div>
+
+        <label for="cf-name">Name
+          <input type="text" id="cf-name" name="name" data-fs-field required>
+          <span data-fs-error="name" class="fs-field-error"></span>
         </label>
-        <label>Email
-          <input type="email" name="email" required>
+        <label for="cf-email">Email
+          <input type="email" id="cf-email" name="email" data-fs-field required>
+          <span data-fs-error="email" class="fs-field-error"></span>
         </label>
-        <label>Message
-          <textarea name="message" rows="5" required></textarea>
+        <label for="cf-message">Message
+          <textarea id="cf-message" name="message" rows="5" data-fs-field required></textarea>
+          <span data-fs-error="message" class="fs-field-error"></span>
         </label>
-        <button type="submit" class="btn btn-primary">Send Message</button>
-        <p class="form-note" id="formNote"></p>
+        <!-- honeypot field: Formspree ignores submissions where this is filled -->
+        <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off">
+        <button type="submit" class="btn btn-primary" data-fs-submit-btn>Send Message</button>
       </form>
       <div class="contact-info">
         <div class="info-row"><span class="info-label">Email</span><a href="mailto:pawanboura9696@gmail.com">pawanboura9696@gmail.com</a></div>
@@ -1045,18 +1057,9 @@ footer{ border-top: 1px solid var(--line); padding-top: 60px; }
 })();
 
 /* =========================================================
-   CONTACT FORM — DEMO SUBMIT (no backend wired up)
+   CONTACT FORM — handled by @formspree/ajax (see script tags
+   at the bottom of the page, right before </body>)
 ========================================================= */
-(function initContactForm(){
-  const form = document.getElementById('contactForm');
-  const note = document.getElementById('formNote');
-  if(!form) return;
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    note.textContent = 'This is a demo form — connect it to a form service (e.g. Formspree) or your own backend to receive messages.';
-    form.reset();
-  });
-})();
 
 /* =========================================================
    SCROLL TO TOP BUTTON
@@ -1095,5 +1098,12 @@ footer{ border-top: 1px solid var(--line); padding-top: 60px; }
 document.getElementById('year').textContent = new Date().getFullYear();
 
 </script>
+<!-- Formspree AJAX integration for #contactForm -->
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contactForm', formId: 'mwvgpead' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
 </body>
 </html>
